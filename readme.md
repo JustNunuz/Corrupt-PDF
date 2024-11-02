@@ -1,6 +1,6 @@
 # PDF: The Perfect Delivery Format (for Malware)
 
-![Corrupt PDF Example](./assets/corrupt%20PDF.jpeg)
+![Corrupt PDF Example](./assets/PDF.jpeg)
 
 ## Presentation for PyCon Zim 2024
 
