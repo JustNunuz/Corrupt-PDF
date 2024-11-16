@@ -1,0 +1,35 @@
+# PDF Creation and Corruption Script
+
+## Overview
+
+This script demonstrates how to:
+1. **Generate a PDF file** using the `ReportLab` library.
+2. **Corrupt the PDF file** by appending random binary data, invalid metadata, or tampered structures.
+
+## How It Works
+
+### PDF Creation
+The script uses the `ReportLab` library to create a simple PDF file containing a few lines of text. This generated PDF is a functional and valid file that can be opened in any standard PDF viewer.
+
+- **File Output**: `original.pdf` is saved in the current working directory.
+- **PDF Content**:
+  - The text "This is a test PDF file." is written to the document.
+  - Additional text explains that this file will be intentionally corrupted.
+
+### PDF Corruption
+The script reads the `original.pdf` file in binary mode and modifies it by appending invalid metadata and random binary data. These changes disrupt the internal structure of the PDF, making it unreadable or prone to errors.
+
+- **File Output**: `corrupted.pdf` is saved as the tampered version of the original.
+- **Corruption Mechanism**:
+  - **Random Binary Data**: A sequence of arbitrary bytes is appended to the file, causing data inconsistencies.
+  - **Invalid Metadata**: Strings mimicking malformed or tampered document properties (e.g., `%InvalidMetadata: Corrupted data`) are inserted, further breaking file functionality.
+
+### What Happens When You Try to Open the Corrupted File?
+When attempting to open the corrupted PDF (`corrupted.pdf`) in a standard PDF viewer:
+- **Error Messages**: The viewer may display errors such as:
+  - "File is corrupted or cannot be opened."
+  - "Unexpected end of file."
+  - "Invalid xref table or trailer."
+- **Failed Opening**: Some PDF viewers might refuse to open the file entirely, while others might show incomplete or garbled content.
+
+These outcomes highlight the importance of maintaining file integrity and verifying the authenticity of PDF documents. By tampering with a file's structure, it's possible to simulate real-world scenarios where malicious actors exploit vulnerabilities in PDF readers or embed harmful content. 
