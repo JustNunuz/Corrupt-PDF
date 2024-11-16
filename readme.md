@@ -22,7 +22,11 @@
 
 ## Presentation for PyCon Zim 2024
 
-This project is a Python-based demonstration of techniques to intentionally corrupt PDF files. It explores the potential vulnerabilities and security risks in handling and manipulating PDF documents, emphasizing issues related to data integrity and document security.
+This project provides a Python-based demonstration of techniques to intentionally corrupt PDF files, highlighting the security vulnerabilities and risks associated with handling and manipulating PDF documents. It emphasizes the critical issues of data integrity and document security, shedding light on how easily PDFs can be exploited.
+
+In the session, I dive into how PDFs can be manipulated, the hidden threats they present, and how they can be weaponized to deliver malware or exploit vulnerabilities within PDF readers. I also demonstrate forensic techniques to detect and analyze these attacks, with a focus on identifying tampered documents, extracting malicious payloads, and understanding the structural complexities that make PDFs both powerful and prone to abuse.
+
+Wanna check out my slides: [[Click here](https://docs.google.com/presentation/d/1KyZD8nERr0gxEnAmliuy8Oh4MUje14a6vduAhqwfCMA/edit?usp=sharing)]
 
 ## Disclaimer
 
