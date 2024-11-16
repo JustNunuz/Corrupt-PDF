@@ -1,0 +1,42 @@
+# PDF Corruption with Broken Cross-Reference (XRef) Table
+
+## Overview
+
+This project demonstrates how to create a simple PDF file and intentionally corrupt its cross-reference (xref) table. The corrupted PDF file is intended to simulate a broken structure that results in errors when opened with PDF viewers.
+
+## What the Code Does
+
+1. **PDF Creation**: 
+   - The script generates a basic, valid PDF file using the `ReportLab` library. 
+   - The file contains simple text: "This is a test PDF file" and "This file will have a broken cross-reference table."
+   
+2. **Corrupting the PDF**:
+   - After creating the valid PDF, the script reads the file and appends a broken xref table.
+   - The corrupted xref table contains invalid object references, an incorrect `startxref`, and points to non-existent objects in the trailer section of the PDF.
+
+   This corruption simulates a malformed PDF that is no longer properly structured, and the file becomes unreadable.
+
+3. **Corrupted PDF**:
+   - The final corrupted PDF is saved as `broken_xref.pdf`, which is the result of appending the corrupted xref table.
+
+## What Happens When You Open the Corrupted PDF
+
+When you attempt to open the corrupted PDF file (`broken_xref.pdf`) in a PDF viewer, the following errors or issues will likely occur:
+
+- **Invalid xref table**: The PDF viewer will be unable to properly read the xref table due to broken or invalid object references.
+- **Unexpected end of file**: The corruption in the xref table can lead to an "Unexpected end of file" error, as the viewer cannot locate the necessary objects in the file.
+- **Cannot find object referenced in xref**: The PDF reader may display an error saying it cannot find the object referenced by the xref table due to the non-existent object offsets.
+  
+As a result, the PDF viewer will fail to render the document, and you may see an error message similar to the following:
+- "Invalid cross-reference table."
+- "Unable to load document."
+- "Unexpected end of file."
+
+The file will appear as corrupted and unusable, highlighting how tampering with the xref table renders a PDF file unreadable.
+
+---
+
+## Files
+
+- **original.pdf**: The valid PDF file created by the script.
+- **broken_xref.pdf**: The corrupted PDF file with a broken xref table.
