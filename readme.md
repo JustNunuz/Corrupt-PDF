@@ -1,31 +1,83 @@
-```
+# About
 
- ██████╗ ██████╗ ██████╗ ██████╗ ██╗   ██╗██████╗ ████████╗    ██████╗ ██████╗ ███████╗
-██╔════╝██╔═══██╗██╔══██╗██╔══██╗██║   ██║██╔══██╗╚══██╔══╝    ██╔══██╗██╔══██╗██╔════╝
-██║     ██║   ██║██████╔╝██████╔╝██║   ██║██████╔╝   ██║       ██████╔╝██║  ██║█████╗  
-██║     ██║   ██║██╔══██╗██╔══██╗██║   ██║██╔═══╝    ██║       ██╔═══╝ ██║  ██║██╔══╝  
-╚██████╗╚██████╔╝██║  ██║██║  ██║╚██████╔╝██║        ██║       ██║     ██████╔╝██║     
- ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝        ╚═╝       ╚═╝     ╚═════╝ ╚═╝     
-                                                                                       
+This folder contains two Python scripts that work together to create a PDF viewer application. The main script, `PDFViewer.py`, provides a graphical user interface (GUI) using Tkinter, allowing users to open, navigate, and view PDF documents. It includes features such as navigation buttons, scrollbars, and theme switching (light/dark mode). The second script, `PDFMiner.py`, handles the backend operations for loading and manipulating PDF files using the PyMuPDF library. It retrieves metadata, extracts text, and manages zoom levels. Additionally, the application includes icons for the file and navigation buttons, enhancing the user experience. A demo PDF file is provided for testing the functionality of the viewer.
 
-```
+# Running
 
-![Corrupt PDF Example](/assets/pdf.jpeg)
-This repo provides a Python-based demonstration of techniques to intentionally corrupt PDF files, highlighting the security vulnerabilities and risks associated with handling and manipulating PDF documents. It emphasizes the critical issues of data integrity and document security, shedding light on how easily PDFs can be exploited.
+1. Be inside the reader directory
+2. run the code:
+   '''python
+   python3 pdfviewer.py
+   '''
 
-## Presentation for PyCon Zim 2024
+Or open in within a code editor and then press run 3. Open file you want to be read. Try using the test_pdf.pdf file.
 
-In the session, I dive into how PDFs can be manipulated, the hidden threats they present, and how they can be weaponized to deliver malware or exploit vulnerabilities within PDF readers. I also demonstrate forensic techniques to detect and analyze these attacks, with a focus on identifying tampered documents, extracting malicious payloads, and understanding the structural complexities that make PDFs both powerful and prone to abuse.
+# Detailed Code Execution
 
-Wanna check out my slides: [[Click here](https://docs.google.com/presentation/d/1KyZD8nERr0gxEnAmliuy8Oh4MUje14a6vduAhqwfCMA/edit?usp=sharing)]
+### 1. **PDFViewer (Main Application)**
 
-## Presentation for PyCon Namibia 2025
-Building up upon the content from the last time I gave this talk, I added a Python-based PDF reader to open PDFs. I will also add a feature to test for removing a password from a protected PDF in two ways: Brute force and remvoing the portion of code.
+The `PDFViewer` class is the main application that provides a graphical user interface (GUI) for viewing PDF files. It uses the Tkinter library to create the GUI components.
 
-## Disclaimer
+#### Key Components:
 
-This repository is intended for educational and research purposes only. It explores techniques for manipulating PDFs, identifying potential vulnerabilities, and demonstrating how these can be achieved using Python. The goal is to reveal and understand how PDF files can be altered or corrupted, with a particular focus on testing PDF viewers' handling of embedded JavaScript and other manipulations.
+- **Initialization**: Sets up the main window, menus, and frames.
+- **Menu Bar**: Includes options for opening files, exiting the application, switching themes (light/dark mode), and zooming in/out.
+- **Canvas**: Displays the PDF pages.
+- **Scrollbars**: Allow vertical and horizontal scrolling of the PDF content.
+- **Navigation Buttons**: Buttons for navigating to the previous and next pages.
+- **Page Label**: Displays the current page number and the total number of pages.
 
-This is not an endorsement or encouragement for malicious use. The techniques demonstrated here should never be used on files intended for distribution or in any way that could harm or disrupt systems, users, or data. Unauthorized use of these methods outside of a controlled, research-focused environment is strictly discouraged and may be illegal.
+#### Key Methods:
 
-By using this repository, you agree to take full responsibility for any actions you take based on this information. Always use these techniques responsibly and within the bounds of applicable laws and ethical guidelines.
+- **`open_file`**: Opens a file dialog to select a PDF file and initializes the `PDFMiner` instance to load the PDF.
+- **`display_page`**: Displays the current page of the PDF on the canvas.
+- **`previous_page` and `next_page`**: Navigate to the previous and next pages, respectively.
+- **`set_light_mode` and `set_dark_mode`**: Switch between light and dark modes.
+- **`zoom_in` and `zoom_out`**: Zoom in and out of the PDF content.
+
+### 2. **PDFMiner Class (PDF Handling)**
+
+The `PDFMiner` class handles the loading and manipulation of PDF files using the `fitz` (PyMuPDF) library.
+
+#### Key Components:
+
+- **Initialization**: Opens the PDF file and loads the first page.
+- **Zoom Dictionary**: Defines zoom levels based on the width of the PDF page.
+
+#### Key Methods:
+
+- **`get_metadata`**: Retrieves metadata from the PDF, such as the author, document name, and number of pages.
+- **`get_page`**: Loads a specific page of the PDF and returns it as an image.
+- **`get_text`**: Extracts text from a specific page of the PDF.
+- **`zoom_in` and `zoom_out`**: Adjust the zoom level of the PDF content.
+
+### Workflow:
+
+1. **Initialization**:
+
+   - The `PDFViewer` class initializes the main window and sets up the GUI components.
+   - The `PDFMiner` class is initialized when a PDF file is opened.
+
+2. **Opening a PDF File**:
+
+   - The user selects a PDF file through the file dialog.
+   - The `PDFMiner` instance is created with the selected file path.
+   - Metadata and the number of pages are retrieved and stored.
+
+3. **Displaying Pages**:
+
+   - The `display_page` method of `PDFViewer` calls the `get_page` method of `PDFMiner` to load and display the current page on the canvas.
+   - The user can navigate through the pages using the navigation buttons or scrollbars.
+
+4. **Zooming**:
+
+   - The user can zoom in and out using the zoom menu options.
+   - The `zoom_in` and `zoom_out` methods of `PDFMiner` adjust the zoom level, and the `display_page` method updates the canvas with the zoomed content.
+
+5. **Themes**:
+   - The user can switch between light and dark modes using the theme menu options.
+   - The `set_light_mode` and `set_dark_mode` methods of `PDFViewer` update the background colors of the main window and canvas.
+
+### Summary:
+
+The `PDFViewer` class provides the GUI for the PDF viewer application, while the `PDFMiner` class handles the backend operations related to PDF loading and manipulation. Together, they create a functional PDF viewer that allows users to open, navigate, zoom, and view PDF files with different themes.
