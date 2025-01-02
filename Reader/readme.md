@@ -2,15 +2,20 @@
 
 This folder contains two Python scripts that work together to create a PDF viewer application. The main script, `PDFViewer.py`, provides a graphical user interface (GUI) using Tkinter, allowing users to open, navigate, and view PDF documents. It includes features such as navigation buttons, scrollbars, and theme switching (light/dark mode). The second script, `PDFMiner.py`, handles the backend operations for loading and manipulating PDF files using the PyMuPDF library. It retrieves metadata, extracts text, and manages zoom levels. Additionally, the application includes icons for the file and navigation buttons, enhancing the user experience. A demo PDF file is provided for testing the functionality of the viewer.
 
-# Running
+# How to Run the Application
 
-1. Be inside the reader directory
-2. run the code:
-   '''python
+1. **Navigate to the Directory**:
+   Ensure you are inside the `reader` directory where the scripts and demo file are located.
+
+2. **Run the Code**:
+   You can run the application using the following command in your terminal:
+   ```python
    python3 pdfviewer.py
-   '''
+   ```
+   Alternatively, you can open the `pdfviewer.py` file in a code editor and press the run button.
 
-Or open in within a code editor and then press run 3. Open file you want to be read. Try using the test_pdf.pdf file.
+3. **Open a PDF File**:
+   Once the application is running, use the file menu to open the PDF file you want to view. You can try using the provided `test_pdf.pdf` file for testing.
 
 # Detailed Code Execution
 
