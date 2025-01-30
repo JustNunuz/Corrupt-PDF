@@ -1,11 +1,13 @@
 ## Create_pdf.py
+
 This file, create_pdf.py, creates a PDF in the password directory. The PDF file can have options for font, size, and other metadata such as the author, title, and subject.
 
 1. **Creating a PDF Manually:**
+
    - When you create a PDF using software like Adobe Acrobat, Microsoft Word, or any other PDF creator, the software often includes metadata such as the author's name, the software used, and the creation date.
    - For example, if you create a PDF using Microsoft Word, the metadata might include your username (as configured in Word) and the software name (Microsoft Word).
-
 2. **Creating a PDF Programmatically (e.g., using Python ReportLab):**
+
    - When you create a PDF using a library like ReportLab in Python, you have control over the metadata that is included. ReportLab allows you to set metadata fields such as the author, title, and subject.
    - Here’s an example of how you might set metadata in ReportLab:
      ```python
@@ -23,12 +25,12 @@ This file, create_pdf.py, creates a PDF in the password directory. The PDF file 
      create_pdf("example.pdf")
      ```
    - In this example, the metadata fields for author, title, and subject are explicitly set.
-
 3. **PDFs Created by Websites or Online Tools:**
+
    - When a website or online tool generates a PDF, the metadata might include information about the website or tool itself. For example, if a website converts a webpage to a PDF, the metadata might include the website's name or the tool used for the conversion.
    - If the website or tool does not explicitly set the metadata, it might default to the server's hostname or other identifiable information.
-
 4. **Corrupted PDFs:**
+
    - If a PDF is corrupted, the metadata might still be present but could be incomplete or incorrect. The ability to read the metadata depends on the extent of the corruption.
    - Tools and libraries used to repair or analyze corrupted PDFs might capture and display whatever metadata is still readable.
 
@@ -36,7 +38,7 @@ In summary, the metadata in a PDF is determined by the software or tool used to 
 
 ## Password Protected PDF
 
-Next, I used the `pdftk` application (available at [pdflabs.com/tools/pdftk-the-pdf-toolkit/](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)) to password protect the PDF using the password 'open'.
+Next, I used the `pdftk` [application](pdflabs.com/tools/pdftk-the-pdf-toolkit/](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)) to password protect the PDF using the password 'open'.
 
 After password protecting the PDF, we analyzed the file using the `analysis.py` script.
 
@@ -51,11 +53,12 @@ To successfully analyze or open the PDF, you need to provide the correct passwor
 
 **To read or analyze a PDF file, it must first be opened** (i.e., loaded into memory). This is true for both `PyPDF2` and `pdfminer.six`. Let me break it down for you:
 
-
 ### 1. **Opening a PDF File**
+
 When you open a PDF file in Python, you typically use a `with open(...)` statement to read the file in binary mode (`"rb"`). This loads the file into memory so that the library (`PyPDF2` or `pdfminer.six`) can process it.
 
 #### Example:
+
 ```python
 with open("example.pdf", "rb") as pdf_file:
     # Now the file is opened and can be processed
@@ -64,7 +67,9 @@ with open("example.pdf", "rb") as pdf_file:
 ---
 
 ### 2. **What Happens When You Open a PDF?**
+
 When you open a PDF file:
+
 - The file is read from disk into memory.
 - The library (e.g., `PyPDF2` or `pdfminer.six`) parses the file's structure (header, objects, trailer, etc.).
 - If the file is **encrypted**, the library will detect this and raise an error unless you provide the correct password.
@@ -72,7 +77,9 @@ When you open a PDF file:
 ---
 
 ### 3. **Why Opening is Necessary**
+
 PDF files are binary files with a complex structure. To analyze them, the library needs to:
+
 - Parse the **header** (which contains the PDF version, e.g., `%PDF-1.7`).
 - Read the **cross-reference table** (which maps object locations in the file).
 - Extract **objects** (which contain the actual content, like text, images, and metadata).
@@ -81,12 +88,15 @@ PDF files are binary files with a complex structure. To analyze them, the librar
 All of this requires the file to be opened and loaded into memory.
 
 ### 4. **What Happens if the PDF is Encrypted?**
+
 If the PDF is encrypted:
+
 - The file can still be **opened** (i.e., loaded into memory).
 - However, the library cannot **decrypt** or **parse** the content without the correct password.
 - Attempting to analyze the file will result in an error (e.g., `PdfReadError` in `PyPDF2` or `PDFEncryptionError` in `pdfminer.six`).
 
 ### 5. **Example Code: Opening and Checking for Encryption**
+
 Here’s an example of opening a PDF and checking if it’s encrypted:
 
 ```python
@@ -97,7 +107,7 @@ pdf_path = "Password/encrypted.pdf"  # Replace with the path to your PDF
 try:
     with open(pdf_path, "rb") as pdf_file:
         reader = PyPDF2.PdfReader(pdf_file)
-        
+      
         # Check if the PDF is encrypted
         if reader.is_encrypted:
             print("The PDF is encrypted. Please provide the password.")
@@ -111,6 +121,7 @@ except Exception as e:
 ---
 
 ### 6. **Decrypting and Analyzing an Encrypted PDF**
+
 If the PDF is encrypted, you need to provide the password to decrypt it before analyzing it. Here’s how you can do it with `PyPDF2`:
 
 ```python
@@ -122,7 +133,7 @@ password = "your_password"  # Replace with the actual password
 try:
     with open(pdf_path, "rb") as pdf_file:
         reader = PyPDF2.PdfReader(pdf_file)
-        
+      
         # Check if the PDF is encrypted
         if reader.is_encrypted:
             # Attempt to decrypt the PDF
@@ -139,6 +150,7 @@ except Exception as e:
 ```
 
 ### 7. **Key Takeaways**
+
 - **Opening the file is mandatory**: You must open the PDF file to analyze it.
 - **Encryption prevents analysis**: If the PDF is encrypted, you cannot analyze it without the correct password.
 - **Decryption is required**: Use the `decrypt()` method in `PyPDF2` to decrypt the file before analysis.
