@@ -1,0 +1,21 @@
+--- PDF Metadata ---
+/Creator: pdftk 2.02 - www.pdftk.com
+/Producer: itext-paulo-155 (itextpdf.sf.net-lowagie.com)
+/ModDate: D:20250128172955Z
+/CreationDate: D:20250128172955Z
+
+--- PDF Header ---
+PDF Version: %PDF-1.3
+
+--- PDF Trailer ---
+/Encrypt: IndirectObject(7, 0, 1684152719632)
+/Info: IndirectObject(8, 0, 1684152719632)
+/Root: IndirectObject(6, 0, 1684152719632)
+/Size: 9
+/ID: ['ƒ_™K²éx<ø¼€l+\x0f]a', 'a°ﬂú}ºÄSž13Œ+-"™']
+
+--- PDF Body (Pages) ---
+
+Page 1:
+Pycon Namibia Presentation
+
